@@ -40,4 +40,6 @@ def getfspath(fs):
 			pieces = line.split(" ")
 			fd.close()
 			return pieces[1]
+	if fs == "sysfs":
+		return getfspath("sys")
 	raise RuntimeError("No "+fs+" mounted.")

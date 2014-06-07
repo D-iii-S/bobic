@@ -1,7 +1,7 @@
 all: bobic.py clocksource.py frequency.py hyperthreading.py iptables.py last.py load.py reservations.py timeservers.py utils.py bobic.sh
 	
 bobic.py clocksource.py frequency.py hyperthreading.py iptables.py last.py load.py reservations.py timeservers.py utils.py bobic.sh:
-	svn checkout -r 4 https://github.com/D-iii-S/Bobic
+	svn checkout -r 7 https://github.com/D-iii-S/Bobic
 	cp Bobic/trunk/*.py .
 	cp Bobic/trunk/bobic.sh bobic.sh
 clean:

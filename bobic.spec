@@ -14,7 +14,7 @@ Performance settings suite for measurement computers
 %build
 
 %install
-svn checkout -r 4 https://github.com/D-iii-S/Bobic
+svn checkout -r 7 https://github.com/D-iii-S/Bobic
 mkdir -p $RPM_BUILD_ROOT/var/lib
 mkdir -p $RPM_BUILD_ROOT/usr/share/bobic
 mkdir -p $RPM_BUILD_ROOT/etc/profile.d
