@@ -5,17 +5,6 @@ Version: 1.1
 Release: 1
 License: ASL 2.0
 BuildArch: noarch
-Source0: bobic.py
-Source1: clocksource.py
-Source2: frequency.py
-Source3: hyperthreading.py
-Source4: iptables.py
-Source5: last.py
-Source6: load.py
-Source7: reservations.py
-Source8: timeservers.py
-Source9: utils.py
-Source10: bobic.sh
 
 %description
 Performance settings suite for measurement computers
@@ -25,23 +14,24 @@ Performance settings suite for measurement computers
 %build
 
 %install
+svn checkout -r 4 https://github.com/D-iii-S/Bobic
 mkdir -p $RPM_BUILD_ROOT/var/lib
 mkdir -p $RPM_BUILD_ROOT/usr/share/bobic
 mkdir -p $RPM_BUILD_ROOT/etc/profile.d
 mkdir -p $RPM_BUILD_ROOT/var/lib/bobic
 touch $RPM_BUILD_ROOT/var/lib/bobic/reservations
 chmod 666 $RPM_BUILD_ROOT/var/lib/bobic/reservations
-install -m 644 %{SOURCE0} $RPM_BUILD_ROOT/usr/share/bobic/
-install -m 644 %{SOURCE1} $RPM_BUILD_ROOT/usr/share/bobic/
-install -m 644 %{SOURCE2} $RPM_BUILD_ROOT/usr/share/bobic/
-install -m 644 %{SOURCE3} $RPM_BUILD_ROOT/usr/share/bobic/
-install -m 644 %{SOURCE4} $RPM_BUILD_ROOT/usr/share/bobic/
-install -m 644 %{SOURCE5} $RPM_BUILD_ROOT/usr/share/bobic/
-install -m 644 %{SOURCE6} $RPM_BUILD_ROOT/usr/share/bobic/
-install -m 644 %{SOURCE7} $RPM_BUILD_ROOT/usr/share/bobic/
-install -m 644 %{SOURCE8} $RPM_BUILD_ROOT/usr/share/bobic/
-install -m 644 %{SOURCE9} $RPM_BUILD_ROOT/usr/share/bobic/
-install -m 644 %{SOURCE10} $RPM_BUILD_ROOT/etc/profile.d/
+install -m 644 Bobic/trunk/bobic.py $RPM_BUILD_ROOT/usr/share/bobic/
+install -m 644 Bobic/trunk/clocksource.py $RPM_BUILD_ROOT/usr/share/bobic/
+install -m 644 Bobic/trunk/frequency.py $RPM_BUILD_ROOT/usr/share/bobic/
+install -m 644 Bobic/trunk/hyperthreading.py $RPM_BUILD_ROOT/usr/share/bobic/
+install -m 644 Bobic/trunk/iptables.py $RPM_BUILD_ROOT/usr/share/bobic/
+install -m 644 Bobic/trunk/last.py $RPM_BUILD_ROOT/usr/share/bobic/
+install -m 644 Bobic/trunk/load.py $RPM_BUILD_ROOT/usr/share/bobic/
+install -m 644 Bobic/trunk/reservations.py $RPM_BUILD_ROOT/usr/share/bobic/
+install -m 644 Bobic/trunk/timeservers.py $RPM_BUILD_ROOT/usr/share/bobic/
+install -m 644 Bobic/trunk/utils.py $RPM_BUILD_ROOT/usr/share/bobic/
+install -m 644 Bobic/trunk/bobic.sh $RPM_BUILD_ROOT/etc/profile.d/
 
 %files
 /var/lib/bobic/reservations
