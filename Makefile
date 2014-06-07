@@ -23,7 +23,7 @@ install:
 	install -m 644 reservations.py /usr/share/bobic/
 	install -m 644 timeservers.py /usr/share/bobic/
 	install -m 644 utils.py /usr/share/bobic/
-	install -m 644 bobic.sh /etc/env.d/
+	install -m 644 bobic.sh /etc/profile.d/
 uninstall:
 	rm -rf /usr/share/bobic
 	rm -rf /var/lib/bobic
