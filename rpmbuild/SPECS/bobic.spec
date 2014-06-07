@@ -1,8 +1,9 @@
-Summary: Performance settings suite for benchmarking computers
+Summary: Performance settings suite for measurement computers
 Name: bobic
-Version: 1.0
-Release: 1.0
-License: Proprietary
+URL: https://github.com/D-iii-S/Bobic
+Version: 1.1
+Release: 1
+License: ASL 2.0
 BuildArch: noarch
 Source0: bobic.py
 Source1: clocksource.py
@@ -17,7 +18,7 @@ Source9: utils.py
 Source10: bobic.sh
 
 %description
-Performance settings suite for benchmarking computers
+Performance settings suite for measurement computers
 
 %prep
 
@@ -27,8 +28,9 @@ Performance settings suite for benchmarking computers
 mkdir -p $RPM_BUILD_ROOT/var/lib
 mkdir -p $RPM_BUILD_ROOT/usr/share/bobic
 mkdir -p $RPM_BUILD_ROOT/etc/profile.d
-touch $RPM_BUILD_ROOT/var/lib/reservations
-chmod 666 $RPM_BUILD_ROOT/var/lib/reservations
+mkdir -p $RPM_BUILD_ROOT/var/lib/bobic
+touch $RPM_BUILD_ROOT/var/lib/bobic/reservations
+chmod 666 $RPM_BUILD_ROOT/var/lib/bobic/reservations
 install -m 644 %{SOURCE0} $RPM_BUILD_ROOT/usr/share/bobic/
 install -m 644 %{SOURCE1} $RPM_BUILD_ROOT/usr/share/bobic/
 install -m 644 %{SOURCE2} $RPM_BUILD_ROOT/usr/share/bobic/
@@ -39,10 +41,10 @@ install -m 644 %{SOURCE6} $RPM_BUILD_ROOT/usr/share/bobic/
 install -m 644 %{SOURCE7} $RPM_BUILD_ROOT/usr/share/bobic/
 install -m 644 %{SOURCE8} $RPM_BUILD_ROOT/usr/share/bobic/
 install -m 644 %{SOURCE9} $RPM_BUILD_ROOT/usr/share/bobic/
-install -m 755 %{SOURCE10} $RPM_BUILD_ROOT/etc/profile.d/
+install -m 644 %{SOURCE10} $RPM_BUILD_ROOT/etc/profile.d/
 
 %files
-/var/lib/reservations
+/var/lib/bobic/reservations
 /usr/share/bobic/bobic.py
 /usr/share/bobic/clocksource.py
 /usr/share/bobic/frequency.py
@@ -73,4 +75,8 @@ install -m 755 %{SOURCE10} $RPM_BUILD_ROOT/etc/profile.d/
 /usr/share/bobic/reservations.pyo
 /usr/share/bobic/timeservers.pyo
 /usr/share/bobic/utils.pyo
-/etc/profile.d/bobic.sh
+%config(noreplace) /etc/profile.d/bobic.sh
+
+%changelog
+* Fri Jun 6 2014 - x (at) 1.1-1
+- cpuinfo invalid ht flag check bypassed

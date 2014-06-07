@@ -211,8 +211,8 @@ class frequency:
 				utils.printwarning(self.alluser.format(effcpucount) + self.tboff)
 			elif not boostconfig[1] and ((boostconfig[2] == -1 and boostconfig[3] == -1) or (boostconfig[2] == 100 and boostconfig[3] == 100)) and nowarn and overall == "stable":
 				print(self.allstable.format(effcpucount, governor) + self.tboff)
-			elif not boostconfig[1] and ((boostconfig[2] == -1 and boostconfig[3] == -1) or (boostconfig[2] == 0 and boostconfig[3] == 100)) and nowarn and overall == "saving":
-				print(self.allsaving.format(effcpucount, governor) + self.tboff)
+			elif boostconfig[1] and ((boostconfig[2] == -1 and boostconfig[3] == -1) or (boostconfig[2] == 0 and boostconfig[3] == 100)) and nowarn and overall == "saving":
+				print(self.allsaving.format(effcpucount, governor) + self.tbon)
 			else:
 				if boostconfig[1]:
 					if boostconfig[2] == -1 and boostconfig[2] == -1:
@@ -233,7 +233,7 @@ class frequency:
 			if not os.path.isdir(boostdir):
 				return
 
-			if mode == 2:
+			if mode != 1:
 				nbvalue = 0
 			else:
 				nbvalue = 1
@@ -260,7 +260,7 @@ class frequency:
 			if not os.path.isfile(boostpath):
 				return
 
-			if mode == 2:
+			if mode != 1:
 				bvalue = 1
 			else:
 				bvalue = 0

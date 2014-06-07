@@ -5,8 +5,9 @@ import utils
 class reservations:
 
 	def __init__(self):
-		self.reservations = "/var/lib/reservations"
+		self.reservations = "/var/lib/bobic/reservations"
 		self.rsvnow = "Computer is reserved RIGHT NOW - since {0} till {1} by {2}"
+		self.rsvforever = "Computer is reserver RIGHT NOW - since {0} forever by {1}"
 		self.rsvfut = "Computer is reserved since {0} till {1} by {2}"
 		self.norsv = "No reservations"
 		self.rsvd = "Computer is already reserved - since {0} till {1} by {2}"
@@ -22,7 +23,10 @@ class reservations:
 			if int(pieces[0]) < today and int(pieces[1]) < today:
 				continue
 			elif int(pieces[0]) <= today:
-				utils.printalert(self.rsvnow.format(pieces[0], pieces[1], pieces[2]))
+				if pieces[1] != "99999999":
+					utils.printalert(self.rsvnow.format(pieces[0], pieces[1], pieces[2]))
+				else:
+					utils.printalert(self.rsvforever.format(pieces[0], pieces[2]))
 				noreservations = False
 				events.append(pieces)
 			else:
@@ -42,7 +46,7 @@ class reservations:
 		if since == "":
 			since = time.strftime("%Y%m%d", time.localtime())
 		if till == "":
-			till = since
+			till = "99999999"
 		fd = open(self.reservations, "r+")
 		fcntl.lockf(fd, fcntl.LOCK_EX)
 		for line in fd:

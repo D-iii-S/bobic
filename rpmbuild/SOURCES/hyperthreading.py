@@ -21,20 +21,29 @@ class hyperthreading:
 		self.syspath = utils.getfspath("sysfs")
 		self.cpusyspath = self.syspath + self.cpucontrolpath
 		self.htavailable = False
+		corelist = []
 		fd = open(self.procpath + "/cpuinfo", "r")
 		for line in fd:
-			if len(line) > 5 and line[0:5] == "flags":
-				pieces = line.split(" ")
-				for p in pieces:
-					if p == "ht":
-						self.htavailable = True
+			if len(line) > 9 and line[0:9] == "processor":
+				pieces = line.split(":")
+				cpunumber = pieces[1].strip()
+			if len(line) > 11 and line[0:11] == "physical id":
+				pieces = line.split(":")
+				physid = pieces[1].strip()
+			if len(line) > 7 and line[0:7] == "core id":
+				pieces = line.split(":")
+				coreid = pieces[1].strip()
+				physcore = physid + ":" + coreid
+				found = False
+				for i in corelist:
+					if i == physcore:
+						found = True
+				if not found:
+					corelist.append(physcore)
+				else:
+					self.htavailable = True
 		fd.close()
-
-	def allthreadsonline(self):
-		if self.htavailable:
-			htenabled = 0
-		else:
-			return 0
+		self.htenabled = 0
 		for i in range(0, self.cpucount):
 			stri = str(i)
 			onlinefile = self.cpusyspath + "/cpu" + stri + "/online"
@@ -42,8 +51,12 @@ class hyperthreading:
 				val = utils.readintfromfile(onlinefile)
 				if val == 0:
 					utils.printalert(self.notonline.format(stri))
-					htenabled += 1
-		return htenabled
+					self.htenabled += 1
+		if self.htenabled != 0:
+			self.htavailable = True
+
+	def allthreadsonline(self):
+		return self.htenabled
 
 	def enablehyperthreading(self):
 		if not self.htavailable:
@@ -82,15 +95,19 @@ class hyperthreading:
 			if len(line) > 9 and line[0:9] == "processor":
 				pieces = line.split(":")
 				cpunumber = pieces[1].strip()
+			if len(line) > 11 and line[0:11] == "physical id":
+				pieces = line.split(":")
+				physid = pieces[1].strip()
 			if len(line) > 7 and line[0:7] == "core id":
 				pieces = line.split(":")
 				coreid = pieces[1].strip()
+				physcore = physid + ":" + coreid
 				found = False
 				for i in corelist:
-					if i == coreid:
+					if i == physcore:
 						found = True
 				if not found:
-					corelist.append(coreid)
+					corelist.append(physcore)
 				else:
 					self.disablecpu(cpunumber)
 		fd.close()
