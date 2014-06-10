@@ -1,10 +1,10 @@
-%global commit 62bcd34fc74250ef532ed2d594f8638a63ed3e5f
+%global commit 808300aaddaad079f45eaf2d778d98a134aca236
 %global zipurl https://github.com/D-iii-S/Bobic/archive/%{commit}.zip
 
 Summary: Performance settings suite for measurement computers
 Name: bobic
 URL: https://github.com/D-iii-S/Bobic
-Version: 1.2
+Version: 1.3
 Release: 1
 License: ASL 2.0
 BuildArch: noarch
@@ -29,6 +29,7 @@ make DESTDIR=$RPM_BUILD_ROOT PREFIX=/usr install
 %files
 %{_sharedstatedir}/%{name}/reservations
 %{_datarootdir}/%{name}/
+%{_bindir}/%{name}
 %config(noreplace) %{_sysconfdir}/profile.d/%{name}.sh
 
 %changelog
