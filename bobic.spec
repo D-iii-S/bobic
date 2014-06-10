@@ -1,10 +1,10 @@
-%global commit 7ec26668710de48cd11db491b6a6ecd79b9c8e6d 
+%global commit 1849b8242354e7a5b6b1d71a1d69b3d0da089362
 %global zipurl https://github.com/D-iii-S/Bobic/archive/%{commit}.zip
 
 Summary: Performance settings suite for measurement computers
 Name: bobic
 URL: https://github.com/D-iii-S/Bobic
-Version: 1.1
+Version: 1.2
 Release: 1
 License: ASL 2.0
 BuildArch: noarch
