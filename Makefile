@@ -8,7 +8,7 @@ install:
 	install -m 755 -d $(DESTDIR)/var/lib/bobic
 	install -m 755 -d $(DESTDIR)$(PREFIX)/share/bobic
 	install -m 755 -d $(DESTDIR)/etc/profile.d
-	install -m 755 -d $(DESTDIR)/bin
+	install -m 755 -d $(DESTDIR)$(PREFIX)/bin
 	
 	touch $(DESTDIR)/var/lib/bobic/reservations
 	chmod 666 $(DESTDIR)/var/lib/bobic/reservations
