@@ -5,9 +5,9 @@ all:
 	@echo "Use target 'install' to install to $(PREFIX)."
 
 install: 
-	install -d $(DESTDIR)/var/lib/bobic
-	install -d $(DESTDIR)$(PREFIX)/share/bobic
-	install -d $(DESTDIR)/etc/profile.d
+	install -m 755 -d $(DESTDIR)/var/lib/bobic
+	install -m 755 -d $(DESTDIR)$(PREFIX)/share/bobic
+	install -m 755 -d $(DESTDIR)/etc/profile.d
 	
 	touch $(DESTDIR)/var/lib/bobic/reservations
 	chmod 666 $(DESTDIR)/var/lib/bobic/reservations
@@ -22,9 +22,11 @@ install:
 	install -m 644 reservations.py $(DESTDIR)$(PREFIX)/share/bobic/
 	install -m 644 timeservers.py $(DESTDIR)$(PREFIX)/share/bobic/
 	install -m 644 utils.py $(DESTDIR)$(PREFIX)/share/bobic/
-	install -m 644 bobic.sh $(DESTDIR)/etc/profile.d/
+	echo "alias bobic='python "$(DESTDIR)$(PREFIX)"/share/bobic/bobic.py'" > bobic.sh
+	echo "python "$(DESTDIR)$(PREFIX)"/share/bobic/bobic.py rc" >> bobic.sh
+	install -m 644 bobic.sh $(DESTDIR)/etc/profile.d/bobic.sh
 	
 uninstall:
-	rm -rf /usr/share/bobic
-	rm -rf /var/lib/bobic
-	rm /etc/profile.d/bobic.sh
+	rm -rf $(DESTDIR)$(PREFIX)/share/bobic
+	rm -rf $(DESTDIR)$(PREFIX)/lib/bobic
+	rm $(DESTDIR)/etc/profile.d/bobic.sh
