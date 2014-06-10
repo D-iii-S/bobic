@@ -38,6 +38,7 @@ elif sys.argv[1] == "rcauto":
 	if check1 or check2:
 		print("Further detections omitted, computer is under load or reserved.")
 		print("To perform complete detection, type `bobic rc`")
+		sys.exit(0)
 	frequency().getfrequencyscaling()
 	hyperthreading().gethyperthreading()
 	clocksource().checkclocksource()
