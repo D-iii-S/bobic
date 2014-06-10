@@ -32,3 +32,4 @@ uninstall:
 	rm -rf $(DESTDIR)$(PREFIX)/share/bobic
 	rm -rf $(DESTDIR)$(PREFIX)/lib/bobic
 	rm $(DESTDIR)/etc/profile.d/bobic.sh
+	rm $(DESTDIR)$(PREFIX)/bin/bobic
