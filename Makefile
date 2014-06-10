@@ -24,8 +24,7 @@ install:
 	install -m 644 utils.py $(DESTDIR)$(PREFIX)/share/bobic/
 	echo "python "$(PREFIX)"/share/bobic/bobic.py rcauto" > bobic.sh
 	install -m 644 bobic.sh $(DESTDIR)/etc/profile.d/
-	echo -n "python "$(PREFIX)"/share/bobic/bobic.py \"$"
-	echo "@\"" > bobic
+	echo -e "python "$(PREFIX)"\x2f\x73\x68\x61\x72\x65\x2f\x62\x6f\x62\x69\x63\x2f\x62\x6f\x62\x69\x63\x2e\x70\x79\x20\x22\x24\x40\x22" > bobic
 	install -m 755 bobic $(DESTDIR)$(PREFIX)/bin/
 	
 uninstall:
