@@ -22,9 +22,10 @@ install:
 	install -m 644 reservations.py $(DESTDIR)$(PREFIX)/share/bobic/
 	install -m 644 timeservers.py $(DESTDIR)$(PREFIX)/share/bobic/
 	install -m 644 utils.py $(DESTDIR)$(PREFIX)/share/bobic/
-	echo "alias bobic='python "$(PREFIX)"/share/bobic/bobic.py'" > bobic.sh
-	echo "python "$(PREFIX)"/share/bobic/bobic.py rcauto" >> bobic.sh
-	install -m 644 bobic.sh $(DESTDIR)/etc/profile.d/bobic.sh
+	echo "python "$(PREFIX)"/share/bobic/bobic.py rcauto" > bobic.sh
+	install -m 644 bobic.sh $(DESTDIR)/etc/profile.d/
+	echo "python "$(PREFIX)"/share/bobic/bobic.py "'"$@"' > bobic
+	install -m 755 bobic $(DESTDIR)$(PREFIX)/bin/
 	
 uninstall:
 	rm -rf $(DESTDIR)$(PREFIX)/share/bobic
