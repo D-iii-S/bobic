@@ -1,4 +1,4 @@
-%global commit 1849b8242354e7a5b6b1d71a1d69b3d0da089362
+%global commit 62bcd34fc74250ef532ed2d594f8638a63ed3e5f
 %global zipurl https://github.com/D-iii-S/Bobic/archive/%{commit}.zip
 
 Summary: Performance settings suite for measurement computers
