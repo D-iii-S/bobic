@@ -11,7 +11,7 @@ from timeservers import timeservers
 def manual():
 	print("Valid commands are:")
 	print("bobic help - list of available commands")
-	print("bobic rc - logon script")
+	print("bobic rc - manual invocation of logon script")
 	print("bobic setmax - set frequency scaling to maximum profile")
 	print("bobic setstable - set frequency scaling to stable profile")
 	print("bobic setsaving - set frequency scaling to saving profile")
@@ -30,16 +30,31 @@ if len(sys.argv) == 1:
 	print("Incorrect BOBIC invocation - to list available command type `bobic help`")
 elif sys.argv[1] == "help":
 	manual()
-elif sys.argv[1] == "rc":
+elif sys.argv[1] == "rcauto":
 	print("")
 	print("BOBIC logon script")
+	check1 = reservations().checkreserve()
+	check2 = load().avgload()
+	if check1 or check2:
+		print("Further detections omitted, computer is under load or reserved.")
+		print("To perform complete detection, type `bobic rc`")
 	frequency().getfrequencyscaling()
 	hyperthreading().gethyperthreading()
-	load().avgload()
 	clocksource().checkclocksource()
 	last().lastlog()
 	timeservers().detect()
+	print("To list all available BOBIC commands type `bobic help`")
+	print("")
+elif sys.argv[1] == "rc":
+	print("")
+	print("BOBIC logon script - manual invocation")
 	reservations().checkreserve()
+	load().avgload()
+	frequency().getfrequencyscaling()
+	hyperthreading().gethyperthreading()
+	clocksource().checkclocksource()
+	last().lastlog()
+	timeservers().detect()
 	print("To list all available BOBIC commands type `bobic help`")
 	print("")
 elif sys.argv[1] == "setmax":

@@ -7,11 +7,13 @@ class load:
 		self.lm = "AVG Load for the last {0} minutes is {1}"
 
 	def avgload(self):
+		retval = False
 		fd = open(self.loadavgfile, "r")
 		content = fd.read()
 		pieces = content.split(" ")
 		if float(pieces[0]) > 0.15:
 			utils.printalert(self.lm.format(1, pieces[0]))
+			retval = True
 		elif float(pieces[0]) > 0.05:
 			utils.printwarning(self.lm.format(1, pieces[0]))
 		else:
@@ -19,6 +21,7 @@ class load:
 
 		if float(pieces[1]) > 0.15:
 			utils.printalert(self.lm.format(5, pieces[1]))
+			retval = True
 		elif float(pieces[1]) > 0.05:
 			utils.printwarning(self.lm.format(5, pieces[1]))
 		else:
@@ -26,6 +29,7 @@ class load:
 
 		if float(pieces[2]) > 0.15:
 			utils.printalert(self.lm.format(15, pieces[2]))
+			retval = True
 		elif float(pieces[2]) > 0.05:
 			utils.printwarning(self.lm.format(15, pieces[2]))
 		else:

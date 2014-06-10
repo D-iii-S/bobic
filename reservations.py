@@ -13,6 +13,7 @@ class reservations:
 		self.rsvd = "Computer is already reserved - since {0} till {1} by {2}"
 
 	def checkreserve(self):
+		retval = False
 		today = int(time.strftime("%Y%m%d", time.localtime()))
 		fd = open(self.reservations, "r+")
 		fcntl.lockf(fd, fcntl.LOCK_EX)
@@ -23,6 +24,7 @@ class reservations:
 			if int(pieces[0]) < today and int(pieces[1]) < today:
 				continue
 			elif int(pieces[0]) <= today:
+				retval = True
 				if pieces[1] != "99999999":
 					utils.printalert(self.rsvnow.format(pieces[0], pieces[1], pieces[2]))
 				else:
@@ -41,6 +43,7 @@ class reservations:
 		fd.close()
 		if noreservations:
 			print(self.norsv)
+		return retval
 
 	def setreserve(self, username, since="", till=""):
 		if since == "":
