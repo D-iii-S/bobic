@@ -35,3 +35,4 @@ class load:
 		else:
 			print(self.lm.format(15, pieces[2]))
 		fd.close()
+		return retval
